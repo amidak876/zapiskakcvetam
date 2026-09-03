@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой сад любви 🌷</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(180deg, #fff5f7 0%, #ffeef2 30%, #fff0f3 70%, #fff5f7 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #4a2c2c;
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 30px;
+            position: relative;
+        }
+        .section-1 { background: linear-gradient(180deg, #fff5f7 0%, #ffe4ec 100%); }
+        .section-2 { background: linear-gradient(180deg, #ffe4ec 0%, #ffd6e0 100%); }
+        .section-3 { background: linear-gradient(180deg, #ffd6e0 0%, #ffc8d6 100%); }
+        .section-4 { background: linear-gradient(180deg, #ffc8d6 0%, #ffb7c5 100%); }
+        .section-5 { background: linear-gradient(180deg, #ffb7c5 0%, #ffa0b4 100%); }
+        .section-6 { background: linear-gradient(180deg, #ffa0b4 0%, #ff8fab 100%); }
+
+        .big-emoji {
+            font-size: 100px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 30px rgba(255, 107, 157, 0.3));
+            animation: bloomIn 1.5s ease forwards;
+            opacity: 0;
+            transform: scale(0);
+        }
+        @keyframes bloomIn {
+            0% { opacity: 0; transform: scale(0) rotate(-20deg); }
+            60% { transform: scale(1.1) rotate(5deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            color: #c75b5b;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 20px rgba(199, 91, 91, 0.2);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.8rem;
+            color: #c4a494;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.5s forwards, bounce 2s ease 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ====== ВИДЕО ====== */
+        .video-section {
+            min-height: auto;
+            padding: 80px 30px;
+        }
+        .video-wrapper {
+            max-width: 700px;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(199, 91, 91, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .video-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 24px;
+        }
+        .video-caption {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #c75b5b;
+            margin-bottom: 30px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        /* ====== ФОТО ====== */
+        .photo-section {
+            min-height: auto;
+            padding: 80px 30px;
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 700px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .photo-grid.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .photo-grid .photo-main {
+            grid-column: 1 / -1;
+        }
+        .photo-item {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(199, 91, 91, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .photo-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(199, 91, 91, 0.25);
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .photo-main { height: 400px; }
+        .photo-small { height: 250px; }
+        .photo-caption {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #c75b5b;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* ====== КАРТОЧКИ ====== */
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 50px 40px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(199, 91, 91, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #c75b5b;
+            margin-bottom: 20px;
+        }
+        .card p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #6b4a4a;
+            font-weight: 300;
+        }
+        .card .emoji-accent {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* ====== ФИНАЛ ====== */
+        .final-section h1 { font-size: 4rem; }
+        .final-section .heart {
+            font-size: 60px;
+            margin: 30px 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+        }
+        .final-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #8b4545;
+            margin-top: 20px;
+        }
+
+        /* ====== ДЕКОР ====== */
+        .sparkles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .sparkle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: #ffb7c5;
+            border-radius: 50%;
+            animation: sparkleAnim 3s ease-in-out infinite;
+        }
+        @keyframes sparkleAnim {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ffb7c5, #ff6b9d);
+            z-index: 100;
+            transition: width 0.1s;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 3rem; }
+            .card { padding: 30px 20px; }
+            .card h2 { font-size: 2rem; }
+            .card p { font-size: 1rem; }
+            .photo-main { height: 280px; }
+            .photo-small { height: 180px; }
+            .video-caption, .photo-caption { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="sparkles" id="sparkles"></div>
+
+    <!-- ОБЛОЖКА -->
+    <section class="section section-1">
+        <div class="big-emoji">💐</div>
+        <h1>Для тебя</h1>
+        <div class="scroll-hint">Листай вниз ↓</div>
+    </section>
+
+    <!-- ВИДЕО -->
+    <section class="section section-2 video-section">
+        <div class="video-caption">Это момент, который я хочу разделить с тобой</div>
+        <div class="video-wrapper" data-animate>
+            <video autoplay muted loop playsinline>
+                <source src="video.mp4" type="video/mp4">
+                Твой браузер не поддерживает видео 😢
+            </video>
+        </div>
+    </section>
+
+    <!-- ФОТО -->
+    <section class="section section-3 photo-section">
+        <div class="photo-caption">Наши моменты</div>
+        <div class="photo-grid" data-animate>
+            <div class="photo-item photo-main">
+                <img src="photo1.jpg" alt="Наше фото">
+            </div>
+            <div class="photo-item photo-small">
+                <img src="photo2.jpg" alt="Наше фото">
+            </div>
+            <div class="photo-item photo-small">
+                <img src="photo3.jpg" alt="Наше фото">
+            </div>
+        </div>
+    </section>
+
+    <!-- ТЕКСТ -->
+    <section class="section section-4">
+        <div class="card" data-animate>
+            <span class="emoji-accent">🌸</span>
+            <h2>Лето на расстоянии</h2>
+            <p>Это лето мы провели врозь, но каждый вечер я закрывал глаза и видел тебя. Расстояние — это просто число километров. А любовь не измеряется в километрах.</p>
+        </div>
+    </section>
+
+    <section class="section section-5">
+        <div class="card" data-animate>
+            <span class="emoji-accent">🌷</span>
+            <h2>Ты сказала — хочу цветы</h2>
+            <p>И я понял, что хочу дарить их тебе всегда. Не потому, что это романтично. А потому что когда ты улыбаешься, глядя на букет — весь мир становится чуточку светлее.</p>
+        </div>
+    </section>
+
+    <!-- ФИНАЛ -->
+    <section class="section section-6 final-section">
+        <div class="card" data-animate>
+            <span class="emoji-accent">🌹</span>
+            <h2>Ты — мой цветок</h2>
+            <p>Эти цветы — лишь символ. Настоящий цветок — это ты. Твоя улыбка, твои глаза, твоя доброта. Я люблю тебя так сильно, что слов не хватит. Но я буду пытаться каждый день.</p>
+            <div class="heart">❤️</div>
+            <div class="final-text">Твой навсегда · 2 сентября 2026</div>
+        </div>
+    </section>
+
+    <script>
+        // Прогресс-бар
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            document.getElementById('progress').style.width = (scrollTop / scrollHeight * 100) + '%';
+        });
+
+        // Анимация при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+        // Мерцающие частицы
+        const sparklesContainer = document.getElementById('sparkles');
+        for (let i = 0; i < 30; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            sparkle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            sparklesContainer.appendChild(sparkle);
+        }
+    </script>
+</body>
+</html>
